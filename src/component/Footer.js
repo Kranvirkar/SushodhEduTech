@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 
 const Footer = () => {
@@ -9,35 +10,68 @@ const Footer = () => {
                         <div className="col-lg-3 col-md-6 footer-contact">
                             <h3>SuShodh</h3>
                             <p>
-                                Valmiki Apartment, Ground floor,<br /> Raghav Nagar, Dhankawadi,<br /> Pune, Maharashtra 411043<br /><br />
-                                <strong>Phone:</strong> 8698288887<br />
-                                <strong>Email:</strong>
-                                <p>Research Department</p>Researchguru2021@gmail.com<br />research@sushodh.com<br />
-                                <p>Administration</p>sushodhedutech@gmail.com<br />admin@sushodh.com<br />
-                                <p>Careers</p>career@sushodh.com<br />sushodhjobs@gmail.com<br />
+                                Runwal Platinum,<br/> Dr. Homi Bhabha Rd, Ram Nagar,<br/>
+                                Bavdhan Pune, Maharashtra 411021<br/>
+                                <br/>
+                                <strong>Phone:</strong> 8698288887<br/>
+                                <strong>Email:</strong> <br/>
+                                <strong>Research Department</strong><br/>
+                                <a href="mailto:SuShodhresearch@gmail.com">SuShodhresearch@gmail.com</a><br/>
+                                <a href="mailto:reasearch@sushodh.com">reasearch@sushodh.com</a><br/>
+                                <strong>Administration</strong><br/>
+                                <a href="mailto:sushodhedutech@gmail.com">sushodhedutech@gmail.com</a><br/>
+                                <a href="mailto:admin@sushodh.com">admin@sushodh.com</a><br/>
+                                <strong>Careers</strong><br/>
+                                <a href="mailto:career@sushodh.com">career@sushodh.com</a><br/>
+                                <a href="mailto:sushodhjobs@gmail.com">sushodhjobs@gmail.com</a><br/>
                             </p>
                         </div>
+
 
                         <div className="col-lg-2 col-md-6 footer-links">
                             <h4>Useful Links</h4>
                             <ul>
-                                <li><i className="bx bx-chevron-right"></i> <a href="index.html">Home</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="courses.html">Courses</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="events.html">Events</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/">Home</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/courses">Courses</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/events">Events</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/terms">Terms of service</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/terms">Privacy policy</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/refund">Refund policy</Link>
+                                </li>
                             </ul>
                         </div>
+
 
                         <div className="col-lg-3 col-md-6 footer-links">
                             <h4>Our Services</h4>
                             <ul>
-                                <li><i className="bx bx-chevron-right"></i> <a href="nursing.html">Nursing Academy</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="softech.html">Softech Solution</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="research.html">Research Institute</a></li>
-                                <li><i className="bx bx-chevron-right"></i> <a href="healthcs.html">Health Care Services</a></li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/about">About Sushodh</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/gallery">Gallery</Link>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i> <a href="reasearch.php">Research Guidance
+                                    Process</a>
+                                </li>
+                                <li>
+                                    <i className="bx bx-chevron-right"></i><li><Link to="/contact">Contact us</Link></li>
+                                </li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>

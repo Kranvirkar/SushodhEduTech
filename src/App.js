@@ -1,37 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from "./component/Header";
-import Hero from "./component/Hero";
-import Carousel from "./component/Carousel";
-import About from "./component/About";
-import Count from "./component/Count";
-import WhyUs from "./component/WhyUs";
-import Trainers from "./component/Trainers";
-import CollaboratorsSection from "./component/CollaboratorsSection";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Footer from "./component/Footer";
-import Courses from "./component/Courses";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import CoursesPage from "./pages/CoursesPage";
+import EventPage from "./pages/EventPage";
+import GalleryPage from "./pages/GalleryPage";
+import ContactUsPage from "./pages/ContactUsPage";
+import TermServicePage from "./pages/TermsServicePage";
+import RefundPage from "./pages/RefundPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
-      <>
-          <Header></Header>
-          <Hero></Hero>
-          <main id="main">
-              <Carousel></Carousel>
-              <About></About>
-              <Count></Count>
-              <WhyUs></WhyUs>
-              <Trainers></Trainers>
-              <CollaboratorsSection></CollaboratorsSection>
-          </main>
-          <Footer></Footer>
-              <Routes>
-                  <Route path="/courses" element={<Courses />} />
-              </Routes>
-
-
-        </>
+          <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/events" element={<EventPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/events" element={<EventPage />} />
+              <Route path="/contact" element={<ContactUsPage />} />
+              <Route path="/terms" element={<TermServicePage />} />
+              <Route path="/privacy" element={<TermServicePage />} />
+              <Route path="/refund" element={<RefundPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              {/*<Route path="*" element={<NotFound />} />*/}
+          </Routes>
         );
         }
 

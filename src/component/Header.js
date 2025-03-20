@@ -5,22 +5,22 @@ const Header = () => {
         <header id="header" className="fixed-top">
             <div className="container d-flex align-items-center">
                 <h1 className="logo mr-auto">
-                    <a href="index.html">Sushodh</a>
+                    <Link to="/">Sushodh</Link>
                 </h1>
 
                 <nav className="nav-menu d-none d-lg-block">
                     <ul>
                         <li className="active">
-                            <a href="index.html">Home</a>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
                             <Link to="/courses">Courses</Link>
                         </li>
                         <li>
-                            <a href="events.html">Events</a>
+                            <Link to="/events">Events</Link>
                         </li>
                         <li>
-                            <a href="gallery.html">Gallery</a>
+                            <Link to="/gallery">Gallery</Link>
                         </li>
 
                         <li>
@@ -28,11 +28,11 @@ const Header = () => {
                         </li>
 
 
-                        <li><a href="contact.html">Contact us</a></li>
+                        <li><Link to="/contact">Contact us</Link></li>
                     </ul>
                 </nav>
 
-                <a href="contact.html" className="get-started-btn">Enquire Now</a>
+                <Link to="/contact" className="get-started-btn">Enquire Now</Link>
             </div>
         </header>
     );

@@ -553,6 +553,38 @@ section {
   padding-bottom: 40px;
 }
 
+.page-title {
+  background: #61ce70;  /* Adjust color if needed */
+  text-align: center;
+  padding: 60px 0;
+  color: white;
+}
+.breadcrumbs {
+  background: #55bb65;
+  padding: 15px 0;
+  text-align: center;
+}
+.breadcrumbs ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  color: white;
+}
+.breadcrumbs ol li {
+  display: inline;
+  font-weight: 500;
+}
+.breadcrumbs ol li a {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+
+
+
 .section-title h2 {
   font-size: 14px;
   font-weight: 500;
@@ -606,6 +638,10 @@ section {
 .breadcrumbs p {
   font-size: 14px;
   margin-bottom: 0;
+}
+
+.about{
+  padding: 60px 0;
 }
 
 /*--------------------------------------------------------------
@@ -1437,6 +1473,29 @@ section {
   border-radius: 50px;
 }
 
+.btn-contact {
+  background: #5fcf80;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.how-section1 {
+  margin-top: -5%;
+  padding: 10%;
+}
+
+.how-section1 h4 {
+  color: #ffa500;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.custom-select{
+  margin-top: 20px;
+}
 .contact .php-email-form button[type="submit"]:hover {
   background: #3ac162;
 }
