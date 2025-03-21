@@ -7,6 +7,7 @@ import Trainers from "../component/Trainers";
 import Footer from "../component/Footer";
 import Count from "../component/Count";
 import CollaboratorsSection from "../component/CollaboratorsSection";
+import Publishes from "../component/Publishes";
 
 
 const HomePage = () => {
@@ -20,6 +21,7 @@ const HomePage = () => {
                 <Count></Count>
                 <WhyUs></WhyUs>
                 <Trainers></Trainers>
+                <Publishes></Publishes>
                 <CollaboratorsSection></CollaboratorsSection>
             </main>
             <Footer></Footer>

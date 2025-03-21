@@ -16,14 +16,14 @@ const Footer = () => {
                                 <strong>Phone:</strong> 8698288887<br/>
                                 <strong>Email:</strong> <br/>
                                 <strong>Research Department</strong><br/>
-                                <a href="mailto:SuShodhresearch@gmail.com">SuShodhresearch@gmail.com</a><br/>
-                                <a href="mailto:reasearch@sushodh.com">reasearch@sushodh.com</a><br/>
+                                <p>SuShodhresearch@gmail.com</p>
+                                <p>reasearch@sushodh.com</p>
                                 <strong>Administration</strong><br/>
-                                <a href="mailto:sushodhedutech@gmail.com">sushodhedutech@gmail.com</a><br/>
-                                <a href="mailto:admin@sushodh.com">admin@sushodh.com</a><br/>
+                                <p>sushodhedutech@gmail.com</p>
+                                <p>admin@sushodh.com</p>
                                 <strong>Careers</strong><br/>
-                                <a href="mailto:career@sushodh.com">career@sushodh.com</a><br/>
-                                <a href="mailto:sushodhjobs@gmail.com">sushodhjobs@gmail.com</a><br/>
+                                <p>career@sushodh.com</p>
+                                <p>sushodhjobs@gmail.com</p>
                             </p>
                         </div>
 
@@ -63,8 +63,7 @@ const Footer = () => {
                                     <i className="bx bx-chevron-right"></i> <Link to="/gallery">Gallery</Link>
                                 </li>
                                 <li>
-                                    <i className="bx bx-chevron-right"></i> <a href="reasearch.php">Research Guidance
-                                    Process</a>
+                                    <i className="bx bx-chevron-right"></i> <Link to="/research">Research Guidance Process</Link>
                                 </li>
                                 <li>
                                     <i className="bx bx-chevron-right"></i><li><Link to="/contact">Contact us</Link></li>

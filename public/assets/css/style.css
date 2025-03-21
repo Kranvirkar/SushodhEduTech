@@ -581,7 +581,16 @@ section {
 }
 
 
-
+.serviceBox {
+  background: white;
+  padding: 5px 30px 25px;
+  margin: 10px 0 0;
+  border-radius: 0 30px;
+  box-shadow: 5px 10px 5px #5fcf80;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #f8f9fa;
+}
 
 
 
@@ -605,6 +614,39 @@ section {
   background: #9ae1af;
   margin: 4px 10px;
 }
+
+
+.tickercontainer {
+  width: 100%;
+  height: auto; /* Set height for the container */
+  overflow: hidden;
+  background: white;
+  position: relative;
+}
+
+.newsticker {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  animation: tickerScroll 10s linear infinite;
+}
+
+.newsticker li {
+  padding: 10px;
+  font-size: 16px;
+  list-style: none;
+  white-space: nowrap;
+}
+
+@keyframes tickerScroll {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
 
 .section-title p {
   margin: 0;
@@ -1483,8 +1525,23 @@ section {
 }
 
 .how-section1 {
-  margin-top: -5%;
+  margin-top: -7%;
   padding: 10%;
+}
+
+.full-size-img {
+  width: 100%;
+  height: 100%;
+  /* Ensures the image covers the parent */
+}
+
+.holder .mask {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+  height: 400px;
+  overflow: hidden;
 }
 
 .how-section1 h4 {

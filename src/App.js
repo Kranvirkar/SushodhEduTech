@@ -9,6 +9,8 @@ import ContactUsPage from "./pages/ContactUsPage";
 import TermServicePage from "./pages/TermsServicePage";
 import RefundPage from "./pages/RefundPage";
 import AboutPage from "./pages/AboutPage";
+import ResearchGuidancePage from "./pages/ResearchGuidancePage";
+import WhyUs from "./component/WhyUs";
 
 function App() {
   return (
@@ -17,12 +19,13 @@ function App() {
               <Route path="/courses" element={<CoursesPage />} />
               <Route path="/events" element={<EventPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/events" element={<EventPage />} />
+              <Route path="/research" element={<ResearchGuidancePage />} />
               <Route path="/contact" element={<ContactUsPage />} />
               <Route path="/terms" element={<TermServicePage />} />
               <Route path="/privacy" element={<TermServicePage />} />
               <Route path="/refund" element={<RefundPage />} />
               <Route path="/about" element={<AboutPage />} />
+              {/*<Route path="/services" element={<WhyUs />} />*/}
               {/*<Route path="*" element={<NotFound />} />*/}
           </Routes>
         );

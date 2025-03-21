@@ -24,7 +24,7 @@ const Header = () => {
                         </li>
 
                         <li>
-                            <a href="reasearch.php">Research Guidance Process</a>
+                            <Link to="/research">Research Guidance Process</Link>
                         </li>
 
 
