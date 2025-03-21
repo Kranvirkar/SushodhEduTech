@@ -647,6 +647,13 @@ section {
   }
 }
 
+.inline-container {
+  display: flex;
+  align-items: center; /* Align vertically */
+  gap: 3px; /* Space between icon and text */
+}
+
+
 
 .section-title p {
   margin: 0;

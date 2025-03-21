@@ -79,9 +79,10 @@ const ContactUs = () => {
 
                                 {/* Right Column - Email */}
                                 <div className="col-lg-6">
-                                    <div className="email">
-                                        <i className="icofont-envelope"></i>
-                                        <h4>Email:</h4>
+                                    <div className="info">
+                                        <div className="address">
+                                            <i className="icofont-envelope"></i>
+                                            <h4>Email:</h4>
                                         <p>
                                             <strong>Research Department</strong><br/>
                                             SuShodhresearch@gmail.com<br/>
@@ -93,6 +94,7 @@ const ContactUs = () => {
                                             career@sushodh.com<br/>
                                             sushodhjobs@gmail.com
                                         </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +103,8 @@ const ContactUs = () => {
                         <div className="container aos-init aos-animate" data-aos="fade-up">
                             <div className="row mt-5">
                                 {/* WhatsApp Image */}
-                                <div className="col-lg-4" >
-                                    <img src="assets/img/whtsapp.png"
+                                <div className="col-lg-4">
+                                <img src="assets/img/whtsapp.png"
                                          alt="WhatsApp"
                                          className=" full-size-img"
                                     />
