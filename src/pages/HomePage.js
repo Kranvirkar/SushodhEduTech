@@ -8,6 +8,7 @@ import Footer from "../component/Footer";
 import Count from "../component/Count";
 import CollaboratorsSection from "../component/CollaboratorsSection";
 import Publishes from "../component/Publishes";
+import GoogleReview from "../component/GoogleReview";
 
 
 const HomePage = () => {
@@ -24,7 +25,9 @@ const HomePage = () => {
                 <Publishes></Publishes>
                 <CollaboratorsSection></CollaboratorsSection>
             </main>
+            <GoogleReview/>
             <Footer></Footer>
+            
         </>
     );
 };
