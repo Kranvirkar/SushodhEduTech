@@ -10,6 +10,10 @@ import TermServicePage from "./pages/TermsServicePage";
 import RefundPage from "./pages/RefundPage";
 import AboutPage from "./pages/AboutPage";
 import ResearchGuidancePage from "./pages/ResearchGuidancePage";
+import {PayNowPage} from "./pages/PayNowPage";
+import Login from "./component/Login";
+import Success from "./component/Success";
+import Failure from "./component/Failure";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
       <Route path="/privacy" element={<TermServicePage />} />
       <Route path="/refund" element={<RefundPage />} />
       <Route path="/about" element={<AboutPage />} />
+        <Route path="/pay-now" element={<PayNowPage />} />
+        <Route path="/sign-in" element={<Login />} />
+        <Route path="/payment-success" element={<Success />} />
+        <Route path="/payment-failure" element={<Failure />} />
       {/*<Route path="/services" element={<WhyUs />} />*/}
       {/*<Route path="*" element={<NotFound />} />*/}
     </Routes>

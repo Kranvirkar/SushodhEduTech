@@ -9,24 +9,23 @@ import Count from "../component/Count";
 import CollaboratorsSection from "../component/CollaboratorsSection";
 import Publishes from "../component/Publishes";
 import GoogleReview from "../component/GoogleReview";
+import Layout from "./Layout";
 
 
 const HomePage = () => {
     return (
         <>
-            <Header></Header>
-            <Hero></Hero>
-            <main id="main">
-                <Carousel></Carousel>
-                <About></About>
-                <Count></Count>
-                <WhyUs></WhyUs>
-                <Trainers></Trainers>
-                <Publishes></Publishes>
-                <CollaboratorsSection></CollaboratorsSection>
-            </main>
-            <GoogleReview/>
-            <Footer></Footer>
+            <Layout>
+                <Hero></Hero>
+                    <Carousel></Carousel>
+                    <About></About>
+                    <Count></Count>
+                    <WhyUs></WhyUs>
+                    <Trainers></Trainers>
+                    <Publishes></Publishes>
+                    <CollaboratorsSection></CollaboratorsSection>
+                <GoogleReview/>
+            </Layout>
             
         </>
     );

@@ -1,15 +1,15 @@
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Gallery from "../component/Gallery";
+import Courses from "../component/Courses";
+import Layout from "./Layout";
 
 const GalleryPage = () => {
     return (
         <>
-            <Header />
-            <main>
+            <Layout>
                 <Gallery />
-            </main>
-            <Footer />
+            </Layout>
         </>
     );
 };

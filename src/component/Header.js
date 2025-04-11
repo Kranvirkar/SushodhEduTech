@@ -35,7 +35,9 @@ const Header = () => {
         <Link to="/contact" className="get-started-btn d-none d-lg-block">
           Enquire Now
         </Link>
-
+        <Link to="/pay-now" className="get-started-btn d-none d-lg-block">
+          Pay Now
+        </Link>
         {/* Mobile Menu Button (Hamburger) */}
         <button
           className="hamburger d-lg-none"
