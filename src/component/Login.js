@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // 👈 Import
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // 👈 Hook
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         const tempErrors = {};
 
@@ -17,28 +20,35 @@ const Login = () => {
 
         if (Object.keys(tempErrors).length === 0) {
             setLoading(true);
-            // Simulate API login
-            setTimeout(() => {
-                console.log('Login successful:', { email, password });
+            try {
+                const response = await axios.post('http://localhost:3001/api/auth/login', {
+                    email, // adjust if your backend uses 'email'
+                    password,
+                });
+
+                const { token } = response.data;
+                localStorage.setItem('authToken', token); // store in localStorage
+
+                console.log('Login successful');
+                navigate('/dashboard');
+            } catch (err) {
+                console.error('Login failed:', err.response?.data || err.message);
+                alert(err.response?.data?.message || 'Login failed');
+            } finally {
                 setLoading(false);
-            }, 1500);
+            }
         }
     };
 
     return (
-        <div className="container my-5 py-5 ">
+        <div className="container my-5 py-5">
             <div className="row justify-content-center mt-3">
-                <div
-                    className="col-md-6 shadow p-4 bg-white"
-                    style={{ borderRadius: '15px' }}
-                >
+                <div className="col-md-6 shadow p-4 bg-white" style={{ borderRadius: '15px' }}>
                     <h2 className="text-center mb-4">Login to Your Account</h2>
 
                     <form onSubmit={handleLogin} noValidate>
                         <div className="mb-3">
-                            <label htmlFor="email" className="form-label">
-                                Email Address
-                            </label>
+                            <label htmlFor="email" className="form-label">Email Address</label>
                             <input
                                 id="email"
                                 type="email"
@@ -47,15 +57,11 @@ const Login = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            {errors.email && (
-                                <div className="invalid-feedback">{errors.email}</div>
-                            )}
+                            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="password" className="form-label">
-                                Password
-                            </label>
+                            <label htmlFor="password" className="form-label">Password</label>
                             <input
                                 id="password"
                                 type="password"
@@ -64,16 +70,10 @@ const Login = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            {errors.password && (
-                                <div className="invalid-feedback">{errors.password}</div>
-                            )}
+                            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                         </div>
 
-                        <button
-                            type="submit"
-                            className="btn btn-primary w-100 pay-btn"
-                            disabled={loading}
-                        >
+                        <button type="submit" className="btn btn-primary w-100" disabled={loading}>
                             {loading ? 'Logging in...' : 'Login'}
                         </button>
                     </form>
