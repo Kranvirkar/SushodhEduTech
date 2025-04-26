@@ -1,15 +1,30 @@
 import { useState, useEffect } from "react";
+import api from "../services/api"; // Make sure you have axios wrapper (or use axios directly)
 
 const Carousel = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [sliderImages, setSliderImages] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    // Fetch images from backend
+    const fetchSliderImages = async () => {
+      try {
+        const response = await api.get("http://localhost:3001/api/sliderImages");
+        setSliderImages(response.data);
+      } catch (error) {
+        console.error("Failed to fetch slider images", error);
+      }
+    };
+
+    fetchSliderImages();
   }, []);
 
   return (
@@ -20,7 +35,6 @@ const Carousel = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop: "0px !important",
       }}
     >
       <div
@@ -33,7 +47,7 @@ const Carousel = () => {
         }}
       >
         <ol className="carousel-indicators">
-          {[...Array(6).keys()].map((index) => (
+          {sliderImages.map((_, index) => (
             <li
               key={index}
               data-target="#carouselExampleIndicators"
@@ -42,32 +56,29 @@ const Carousel = () => {
             ></li>
           ))}
         </ol>
+
         <div className="carousel-inner">
-          {[
-            "assets/img/Sushodh/Slider 1.jpg",
-            "assets/img/Sushodh/Slider 2.jpg",
-            "assets/img/Sushodh/Slider 2a.jpeg",
-            "assets/img/Sushodh/Slider 3.jpg",
-            "assets/img/Sushodh/Slider 4.jpg",
-            "assets/img/Sushodh/Slider 5.jpeg",
-          ].map((src, index) => (
+          {sliderImages.map((img, index) => (
             <div
               className={`carousel-item ${index === 0 ? "active" : ""}`}
-              key={index}
+              key={img.id}
             >
               <img
                 className="d-block w-100"
-                src={src}
-                alt={`Slide ${index + 1}`}
+                src={`data:image/jpeg;base64,${img.image}`} // backend sending base64 string
+                alt={img.title || `Slide ${index + 1}`}
                 style={{
                   height: isMobile ? "auto" : "600px",
                   maxHeight: isMobile ? "300px" : "none",
                   width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
                 }}
               />
             </div>
           ))}
         </div>
+
         <a
           className="carousel-control-prev"
           href="#carouselExampleIndicators"
