@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import config from "../services/config";
 
 const Events = () => {
     const [events, setEvents] = useState([]);
-
+    const url =process.env.API_BASE_URL;
+    console.log(url)
     useEffect(() => {
-        axios.get("http://localhost:3001/api/events")
+        axios.get(`${config.API_BASE_URL}/events`)
             .then((response) => {
                 setEvents(response.data);
             })
@@ -21,16 +23,18 @@ const Events = () => {
                     <h2>Events</h2>
                 </div>
             </div>
-
             <div className="how-section1">
                 {events.map((event, index) => {
                     const imageContent = (
                         <div className="col-md-6 how-img">
-                            {event.image && (
-                                <img src={event.image} className="img-fluid" alt={`Event ${index + 1}`} />
-                            )}
-                            {event.images && event.images.map((img, idx) => (
-                                <img key={idx} src={img} className="img-fluid" alt={`Event ${index + 1} - ${idx + 1}`} />
+                            {event.images && event.images.length > 0 && event.images.map((img, idx) => (
+                                <img
+                                    key={idx}
+                                    src={img.image.startsWith("data:") ? img.image : `data:image/jpeg;base64,${img.image}`}
+                                    className="img-fluid mb-2"
+                                    alt={`Event ${index + 1} - ${idx + 1}`}
+                                    loading="lazy"
+                                />
                             ))}
                         </div>
                     );
@@ -38,15 +42,15 @@ const Events = () => {
                     const textContent = (
                         <div className="col-md-6">
                             <h4><b>Name Of Event:</b></h4>
-                            <p className="text-muted">{event.name}</p><br />
+                            <p className="text-muted">{event.name}</p><br/>
 
                             <h4><b>Date:</b></h4>
-                            <p className="text-muted">{event.date}</p><br />
+                            <p className="text-muted">{event.date}</p><br/>
 
                             {event.venue && (
                                 <>
                                     <h4><b>Venue:</b></h4>
-                                    <p className="text-muted">{event.venue}</p><br />
+                                    <p className="text-muted">{event.venue?.trim()}</p><br/>
                                 </>
                             )}
 
@@ -60,13 +64,12 @@ const Events = () => {
                                     </a>
                                 </>
                             )}
-                            <br />
-                            <br />
+                            <br/><br/>
                         </div>
                     );
 
                     return (
-                        <div className="row" key={event.id || index}>
+                        <div className="row mb-5" key={event.id || index}>
                             {index % 2 === 0 ? (
                                 <>
                                     {textContent}
@@ -78,7 +81,6 @@ const Events = () => {
                                     {textContent}
                                 </>
                             )}
-                            <br /><br />
                         </div>
                     );
                 })}

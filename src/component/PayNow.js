@@ -1,16 +1,18 @@
 import { useState } from "react";
-import api from "../services/api";
-import axios from "axios"; // Adjust path as needed
+import axios from "axios";
+import config from "../services/config";
 
 export const PayNow = () => {
     const [mobileNumber, setMobileNumber] = useState('');
     const [amount, setAmount] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [reason, setReason] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const url = "/create-payment";
+    const gstAmount = amount ? ((parseFloat(amount) * 0.18).toFixed(2)) : 0;
+    const totalPayable = amount ? (parseFloat(amount) + parseFloat(gstAmount)).toFixed(2) : 0;
 
     const validate = () => {
         const errs = {};
@@ -19,6 +21,7 @@ export const PayNow = () => {
         if (isNaN(parseInt(amount)) || parseInt(amount) <= 0) {
             errs.amount = "Enter a valid amount greater than 0.";
         }
+        if (!reason.trim()) errs.reason = "Reason is required.";
         setErrors(errs);
         return Object.keys(errs).length === 0;
     };
@@ -29,11 +32,12 @@ export const PayNow = () => {
 
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:3001/api/create-payment", {
+            const res = await axios.post(`${config.API_BASE_URL}/create-payment`, {
                 amount: parseInt(amount),
                 mobileNumber: mobileNumber.trim(),
                 name: name.trim(),
                 email,
+                reason,
             });
 
             if (res.data?.qrUrl) {
@@ -48,11 +52,11 @@ export const PayNow = () => {
         setLoading(false);
     };
 
-    return(
-        <div className="container my-5 py-5 ">
-            <div className="row justify-content-center mt-3">
-                <div className="col-md-6 shadow p-4  bg-white " style={{borderRadius:"15px"}}>
-                    <h2 className="text-center mb-4 ">Pay with PhonePe</h2>
+    return (
+        <div className="container my-5 py-5">
+            <div className="row justify-content-center ">
+                <div className="col-md-6 shadow p-4 bg-white" style={{ borderRadius: "15px" }}>
+                    <h2 className="text-center mb-4">Pay with PhonePe</h2>
 
                     <form onSubmit={handlePayment} noValidate>
                         <div className="mb-3">
@@ -60,7 +64,7 @@ export const PayNow = () => {
                             <input
                                 id="name"
                                 type="text"
-                                className={`form-control ${errors.name ? 'is-invalid' : ''} `}
+                                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                                 placeholder="Enter Full Name"
                                 value={name}
                                 maxLength="50"
@@ -97,6 +101,17 @@ export const PayNow = () => {
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="gst" className="form-label">GST (18%)</label>
+                            <input
+                                id="gst"
+                                type="text"
+                                className="form-control"
+                                value={`₹${gstAmount}`}
+                                disabled
+                            />
+                        </div>
+
+                        <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email</label>
                             <input
                                 id="email"
@@ -109,12 +124,25 @@ export const PayNow = () => {
                             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                         </div>
 
+                        <div className="mb-3">
+                            <label htmlFor="reason" className="form-label">Reason</label>
+                            <input
+                                id="reason"
+                                type="text"
+                                className={`form-control ${errors.reason ? 'is-invalid' : ''}`}
+                                placeholder="Reason for Payment"
+                                value={reason}
+                                onChange={(e) => setReason(e.target.value)}
+                            />
+                            {errors.reason && <div className="invalid-feedback">{errors.reason}</div>}
+                        </div>
+
                         <button
                             type="submit"
                             className="btn btn-primary w-100 pay-btn"
                             disabled={loading}
                         >
-                            {loading ? 'Processing...' : `Pay ₹${amount || '___'}`}
+                            {loading ? 'Processing...' : `Pay ₹${totalPayable || '___'}`}
                         </button>
                     </form>
                 </div>

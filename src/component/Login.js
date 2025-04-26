@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // 👈 Import
+import { useNavigate } from 'react-router-dom';
+import config from "../services/config"; // 👈 Import
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
         if (Object.keys(tempErrors).length === 0) {
             setLoading(true);
             try {
-                const response = await axios.post('http://localhost:3001/api/auth/login', {
+                const response = await axios.post(`${config.API_BASE_URL}/auth/login`, {
                     email, // adjust if your backend uses 'email'
                     password,
                 });
