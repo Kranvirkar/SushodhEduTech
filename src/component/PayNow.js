@@ -8,6 +8,18 @@ export const PayNow = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [reason, setReason] = useState('');
+    const [customReason, setCustomReason] = useState('');
+    const reasons = [
+        "PhD/PG Thesis",
+        "Research/Manuscript",
+        "Conferences",
+        "Book Publication with ISBN",
+        "Plagiarism Checker",
+        "Paper Publication",
+        "Pager Presentation",
+        "Patent /Copyright/Trademark",
+        "Other"
+    ];
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
 
@@ -22,6 +34,7 @@ export const PayNow = () => {
             errs.amount = "Enter a valid amount greater than 0.";
         }
         if (!reason.trim()) errs.reason = "Reason is required.";
+        if (reason === "Other" && !customReason.trim()) errs.customReason = "Please specify a reason.";
         setErrors(errs);
         return Object.keys(errs).length === 0;
     };
@@ -33,11 +46,11 @@ export const PayNow = () => {
         setLoading(true);
         try {
             const res = await axios.post(`${config.API_BASE_URL}/create-payment`, {
-                amount: parseInt(amount),
+                amount: parseInt(totalPayable),
                 mobileNumber: mobileNumber.trim(),
                 name: name.trim(),
                 email,
-                reason,
+                reason: reason === "Other" ? customReason.trim() : reason,
             });
 
             if (res.data?.qrUrl) {
@@ -54,7 +67,7 @@ export const PayNow = () => {
 
     return (
         <div className="container my-5 py-5">
-            <div className="row justify-content-center ">
+            <div className="row justify-content-center">
                 <div className="col-md-6 shadow p-4 bg-white" style={{ borderRadius: "15px" }}>
                     <h2 className="text-center mb-4">Pay with PhonePe</h2>
 
@@ -125,17 +138,36 @@ export const PayNow = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="reason" className="form-label">Reason</label>
-                            <input
+                            <label htmlFor="reason" className="form-label mr-2">Reason</label>
+
+                            <select
                                 id="reason"
-                                type="text"
-                                className={`form-control ${errors.reason ? 'is-invalid' : ''}`}
-                                placeholder="Reason for Payment"
+                                className={`form-select ${errors.reason ? 'is-invalid' : ''}`}
                                 value={reason}
                                 onChange={(e) => setReason(e.target.value)}
-                            />
+                            >
+                                <option value="">Select a reason</option>
+                                {reasons.map((item, index) => (
+                                    <option key={index} value={item}>{item}</option>
+                                ))}
+                            </select>
                             {errors.reason && <div className="invalid-feedback">{errors.reason}</div>}
                         </div>
+
+                        {reason === "Other" && (
+                            <div className="mb-3">
+                                <label htmlFor="customReason" className="form-label">Please specify</label>
+                                <input
+                                    id="customReason"
+                                    type="text"
+                                    className={`form-control ${errors.customReason ? 'is-invalid' : ''}`}
+                                    placeholder="Enter custom reason"
+                                    value={customReason}
+                                    onChange={(e) => setCustomReason(e.target.value)}
+                                />
+                                {errors.customReason && <div className="invalid-feedback">{errors.customReason}</div>}
+                            </div>
+                        )}
 
                         <button
                             type="submit"

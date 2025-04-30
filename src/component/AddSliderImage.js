@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from "../services/api";
+import config from "../services/config";
 
 const AddSliderImage = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -11,7 +12,7 @@ const AddSliderImage = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await api.get('http://localhost:3001/api/sliderImages');
+      const response = await api.get(`${config.API_BASE_URL}/sliderImages`);
       setImages(response.data);
     } catch (error) {
       console.error('Failed to fetch images', error);
@@ -44,7 +45,7 @@ const AddSliderImage = () => {
 
     try {
       setUploading(true);
-      await api.post('http://localhost:3001/api/sliderImages/upload', formData, {
+      await api.post(`${config.API_BASE_URL}/sliderImages/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -66,7 +67,7 @@ const AddSliderImage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this image?')) {
       try {
-        await api.delete(`http://localhost:3001/api/sliderImages/${id}`);
+        await api.delete(`${config.API_BASE_URL}/sliderImages/${id}`);
         setMessage('Image deleted successfully!');
         fetchImages(); // refresh the images after delete
       } catch (error) {

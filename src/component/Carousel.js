@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import api from "../services/api"; // Make sure you have axios wrapper (or use axios directly)
+import api from "../services/api";
+import config from "../services/config"; // Make sure you have axios wrapper (or use axios directly)
 
 const Carousel = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -17,7 +18,7 @@ const Carousel = () => {
     // Fetch images from backend
     const fetchSliderImages = async () => {
       try {
-        const response = await api.get("http://localhost:3001/api/sliderImages");
+        const response = await api.get(`${config.API_BASE_URL}/sliderImages`);
         setSliderImages(response.data);
       } catch (error) {
         console.error("Failed to fetch slider images", error);

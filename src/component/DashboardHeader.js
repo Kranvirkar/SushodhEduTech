@@ -1,18 +1,23 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";  // useNavigate added
 
 const DashboardHeader = () => {
     const location = useLocation().pathname;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();  // Hook to handle navigation
 
     const navItems = [
         { path: "/dashboard", label: "Home" },
-        { path: "/dcourses", label: "Courses" },
         { path: "/devents", label: "Events" },
-        { path: "/dgallery", label: "Gallery" },
-        { path: "/dresearch", label: "Research Guidance Process" },
-        { path: "/dcontact", label: "Contact us" },
+        { path: "/dgallery", label: "Gallery"}
     ];
+
+    const handleLogout = () => {
+        // Clear token from localStorage
+        localStorage.removeItem('authToken');
+        // Navigate to the sign-in page
+        navigate('/sign-in');
+    };
 
     return (
         <header id="header" className="fixed-top">
@@ -31,7 +36,9 @@ const DashboardHeader = () => {
                         ))}
                     </ul>
                 </nav>
-
+                <button onClick={handleLogout} className="get-started-btn d-none d-lg-block">
+                    logout
+                </button>
 
                 {/* Mobile Menu Button (Hamburger) */}
                 <button
@@ -60,69 +67,59 @@ const DashboardHeader = () => {
 
             {/* CSS Styles */}
             <style jsx>{`
-        .hamburger {
-          background: none;
-          border: none;
-          font-size: 2rem;
-          cursor: pointer;
-          margin-right : 0px; 
-        }
+                .hamburger {
+                    background: none;
+                    border: none;
+                    font-size: 2rem;
+                    cursor: pointer;
+                    margin-right: 0px;
+                }
 
-        /* Canvas (Sidebar) Menu */
-        .canvas-menu {
-          position: fixed;
-          top: 0;
-          right: -100%;
-          width: 250px;
-          height: 100vh;
-          background: white;
-          box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-          transition: right 0.3s ease-in-out;
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: start;
-        }
+                /* Canvas (Sidebar) Menu */
+                .canvas-menu {
+                    position: fixed;
+                    top: 0;
+                    right: -100%;
+                    width: 250px;
+                    height: 100vh;
+                    background: white;
+                    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+                    transition: right 0.3s ease-in-out;
+                    padding: 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                }
 
-        .canvas-menu.open {
-          right: 0;
-        }
+                .canvas-menu.open {
+                    right: 0;
+                }
 
-        .canvas-menu ul {
-          list-style: none;
-          padding: 0;
-          width: 100%;
-        }
+                .canvas-menu ul {
+                    list-style: none;
+                    padding: 0;
+                    width: 100%;
+                }
 
-        .canvas-menu ul li {
-          padding: 1rem 0;
-          border-bottom: 1px solid #ddd;
-        }
+                .canvas-menu ul li {
+                    padding: 1rem 0;
+                    border-bottom: 1px solid #ddd;
+                }
 
-        .canvas-menu ul li:last-child {
-          border-bottom: none;
-        }
+                .canvas-menu ul li:last-child {
+                    border-bottom: none;
+                }
 
-        .close-btn {
-          font-size: 2rem;
-          border: none;
-          background: none;
-          cursor: pointer;
-          position: absolute;
-          top: 10px;
-          right: 20px;
-        }
-
-        /* Overlay */
-        .overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100vh;
-          z-index: 998;
-        }
-      `}</style>
+                .close-btn {
+                    font-size: 2rem;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 10px;
+                    right: 20px;
+                }
+            `}</style>
         </header>
     );
 };

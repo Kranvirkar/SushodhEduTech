@@ -27,11 +27,16 @@ const Login = () => {
                     password,
                 });
 
-                const { token } = response.data;
-                localStorage.setItem('authToken', token); // store in localStorage
+                console.log('API Response:', response.data); // Add log to verify the response
 
-                console.log('Login successful');
-                navigate('/dashboard');
+                const { token } = response.data;
+                if (token) {
+                    localStorage.setItem('authToken', token); // store in localStorage
+                    console.log('Login successful, token stored.');
+                    navigate('/dashboard'); // navigate to the dashboard page
+                } else {
+                    alert('Token not received');
+                }
             } catch (err) {
                 console.error('Login failed:', err.response?.data || err.message);
                 alert(err.response?.data?.message || 'Login failed');

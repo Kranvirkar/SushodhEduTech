@@ -1,12 +1,32 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 const Gallery = () => {
-    const imagePaths = [
-        "PHOTO-2021-12-12-10-37-43.jpg",
-        "PHOTO-2021-12-17-12-28-53.jpg",
-        "PHOTO-2021-12-17-14-50-14.jpg",
-        "PHOTO-2021-12-18-09-29-55.jpg",
-        "PHOTO-2021-12-18-09-35-06.jpg",
-        "PHOTO-2021-12-18-09-53-47.jpg"
-    ];
+    const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/gallery');
+
+                // Assuming response.data is like:
+                // [{ id: 1, title: 'Image 1', image: 'BASE64_STRING' }, {...}]
+                setImages(response.data);
+
+            } catch (error) {
+                console.error('Error fetching gallery images:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchImages();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <main id="main">
@@ -18,15 +38,16 @@ const Gallery = () => {
             </div>
 
             {/* Gallery Section */}
-            <div className="container gallery-section">
+            <div className="container gallery-section mt-3">
                 <div className="row">
-                    {imagePaths.map((fileName, index) => (
-                        <div key={index} className="col-md-4 col-sm-6 mb-4">
+                    {images.map((img) => (
+                        <div key={img.id} className="col-md-4 col-sm-6 mb-4">
                             <div className="gallery-item">
                                 <img
-                                    src={`${process.env.PUBLIC_URL}/assets/img/Gallery/${fileName}`}
-                                    className="img-fluid rounded"
-                                    alt={`Gallery ${index + 1}`}
+                                    src={`data:image/jpeg;base64,${img.image}`} // base64 image
+                                    alt={img.title || 'Gallery Image'}
+                                    className="card-img-top img-fluid rounded"
+                                    style={{ height: '200px', objectFit: 'cover' }}
                                 />
                             </div>
                         </div>
